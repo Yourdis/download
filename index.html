@@ -6,37 +6,48 @@
   <title>تحميل تطبيق Yourdis</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
-      background: #f9f9f9;
+      background: #FFF5E0;
       color: #333;
+      text-align: center;
     }
-    p {
-      font-size: 1.25rem;
+    .message {
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+    .message span {
+      display: block;
+    }
+    /* مسافة بين العبارة العربية والإنجليزية */
+    .message span + span {
+      margin-top: 1.5rem;
     }
   </style>
+  <script defer>
+    (() => {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      let target = "https://yourdis.com";
+      if (/android/i.test(ua)) {
+        target = "https://play.google.com/store/apps/details?id=com.yourdis";
+      } else if (/iPad|iPhone|iPod/.test(navigator.platform) && !window.MSStream) {
+        target = "https://apps.apple.com/sa/app/yourdis/id6584529767";
+      }
+      // إعادة التوجيه بعد 1.5 ثانية
+      setTimeout(() => location.replace(target), 1500);
+    })();
+  </script>
 </head>
 <body>
-  <p id="message">يرجى الانتظار... جاري توجيهك للمتجر</p>
-
-  <script>
-    // تحديد نوع الجهاز
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    let target;
-
-    if (/android/i.test(ua)) {
-      target = "https://play.google.com/store/apps/details?id=com.yourdis";
-    } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-      target = "https://apps.apple.com/sa/app/yourdis/id6584529767";
-    } else {
-      target = "https://yourdis.com";  // للمستخدمين على الكمبيوتر أو أنظمة أخرى
-    }
-
-    // تأخير بسيط لإظهار الرسالة
-    setTimeout(() => {
-      window.location.href = target;
-    }, 1500); // 1.5 ثانية
-  </script>
+  <p class="message">
+    <span>يرجى الانتظار... جاري توجيهك للمتجر</span>
+    <span>Please wait... Redirecting you to the store</span>
+  </p>
 </body>
 </html>
